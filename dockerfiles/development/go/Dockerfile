@@ -10,7 +10,7 @@ RUN mkdir -p /go && \
     mkdir -p /root/ayanerer
 
 ENV GOPATH /go
-ENV GOJIROOT /root/ayanerer
+ENV ECHOROOT /root/ayanerer
 
 ENV HOME /root
 WORKDIR ${HOME}
@@ -18,7 +18,7 @@ WORKDIR ${HOME}
 RUN go get github.com/mattn/gom
 
 ENV GO15VENDOREXPERIMENT 0
-ENV GOJIENV development
+ENV ECHOENV development
 
 EXPOSE 9090:9090
 
