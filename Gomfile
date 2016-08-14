@@ -1,1 +1,3 @@
 gom "github.com/labstack/echo"
+gom "github.com/flosch/pongo2"
+gom "github.com/pkg/errors"
