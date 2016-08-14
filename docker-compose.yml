@@ -1,0 +1,25 @@
+version: '2'
+services:
+  storage:
+    image: busybox
+    volumes:
+      - /var/lib/mysql
+  mysql:
+    image: mysql:5.6.29
+    volumes_from:
+      - storage
+    ports:
+      - "3307:3306"
+    environment:
+      MYSQL_ALLOW_EMPTY_PASSWORD: "true"
+  go:
+    build: dockerfiles/development/go
+    env_file: .docker-env
+    volumes:
+      - ~/.ssh:/root/.ssh
+      - .:/root/ayanerer
+    links:
+      - mysql:mysql
+    ports:
+      - "9090:9090"
+    command: /bin/sh
