@@ -12,6 +12,11 @@ services:
       - "3307:3306"
     environment:
       MYSQL_ALLOW_EMPTY_PASSWORD: "true"
+  node:
+    build: dockerfiles/development/node
+    volumes:
+      - .:/var/opt/app
+    command: npm run-script watch
   go:
     build: dockerfiles/development/go
     env_file: .docker-env
@@ -20,6 +25,7 @@ services:
       - .:/root/ayanerer
     links:
       - mysql:mysql
+      - node:node
     ports:
       - "9090:9090"
     command: /bin/sh

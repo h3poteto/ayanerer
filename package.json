@@ -1,0 +1,28 @@
+{
+  "name": "ayanerer",
+  "version": "1.0.0",
+  "description": "",
+  "main": "index.js",
+  "scripts": {
+    "watch": "webpack --watch",
+    "test": "echo \"Error: no test specified\""
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/h3poteto/ayanerer.git"
+  },
+  "author": "h3poteto",
+  "license": "ISC",
+  "bugs": {
+    "url": "https://github.com/h3poteto/ayanerer/issues"
+  },
+  "homepage": "https://github.com/h3poteto/ayanerer#readme",
+  "devDependencies": {
+    "css-loader": "^0.23.1",
+    "extract-text-webpack-plugin": "^1.0.1",
+    "node-sass": "^3.8.0",
+    "sass-loader": "^4.0.0",
+    "style-loader": "^0.13.1",
+    "webpack": "^1.13.1"
+  }
+}
