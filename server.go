@@ -15,6 +15,9 @@ import (
 func routes(e *echo.Echo) {
 	root := controllers.Root{}
 	e.Get("/", root.Index)
+
+	sessions := controllers.Sessions{}
+	e.Get("/sessions/new", sessions.New)
 }
 
 func main() {
