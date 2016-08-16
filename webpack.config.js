@@ -6,7 +6,7 @@ module.exports = [{
     style: './frontend/stylesheets/application.scss'
   },
   output: {
-    path: path.join(__dirname, 'public/assets'),
+    path: path.join(__dirname, 'public/assets/stylesheets'),
     filename: 'application.css'
   },
   module: {
@@ -23,5 +23,5 @@ module.exports = [{
   },
   plugins: [
         new ExtractTextPlugin("application.css")
-    ]
+  ]
 }];

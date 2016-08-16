@@ -5,6 +5,7 @@ import (
 	"path/filepath"
 
 	"./controllers"
+	"./filters"
 
 	"github.com/flosch/pongo2"
 	"github.com/labstack/echo"
@@ -37,4 +38,5 @@ func main() {
 func setupPongo() {
 	root := os.Getenv("ECHOROOT")
 	pongo2.DefaultSet = pongo2.NewSet("default", pongo2.MustNewLocalFileSystemLoader(filepath.Join(root, "views")))
+	pongo2.RegisterFilter("suffixAssetsUpdate", filters.SuffixAssetsUpdate)
 }
