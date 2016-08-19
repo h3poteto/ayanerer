@@ -10,9 +10,11 @@ import (
 	"gopkg.in/yaml.v2"
 )
 
+// Database is struct for database connection
 type Database struct {
 }
 
+// Init is prepare database connection
 func (u *Database) Init() *sql.DB {
 	env := os.Getenv("ECHOENV")
 	root := os.Getenv("ECHOROOT")

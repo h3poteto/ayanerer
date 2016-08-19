@@ -6,6 +6,7 @@ import (
 	"github.com/pkg/errors"
 )
 
+// Ayaneru is struct for ayane conents
 type Ayaneru struct {
 	ID       int64
 	Source   string
@@ -14,10 +15,13 @@ type Ayaneru struct {
 }
 
 const (
-	Image   = "image"
+	// Image is a type of contents
+	Image = "image"
+	// Youtube is a type of contents
 	Youtube = "youtube"
 )
 
+// NewAyaneru prepare struct for Ayaneru
 func NewAyaneru(id int64, source string, url string) *Ayaneru {
 	ayaneru := &Ayaneru{
 		ID:     id,
@@ -28,10 +32,12 @@ func NewAyaneru(id int64, source string, url string) *Ayaneru {
 	return ayaneru
 }
 
+// Initialize database connection
 func (u *Ayaneru) Initialize() {
 	u.database = &db.Database{}
 }
 
+// Save struct in database
 func (u *Ayaneru) Save() error {
 	table := u.database.Init()
 	defer table.Close()
