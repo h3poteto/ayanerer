@@ -6,6 +6,7 @@ import (
 	"os"
 	"path/filepath"
 
+	// require mysql but is not referred
 	_ "github.com/go-sql-driver/mysql"
 	"gopkg.in/yaml.v2"
 )
