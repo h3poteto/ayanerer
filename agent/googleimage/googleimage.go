@@ -5,6 +5,7 @@ import (
 	"log"
 	"net/http"
 	"os"
+	"sync"
 
 	"../../models/image"
 
@@ -15,6 +16,23 @@ import (
 
 func main() {
 
+	sortAllFlag := flag.Bool("all", false, "Get default sort images")
+	flag.Parse()
+
+	resultNum := int64(10)
+	nextStart := int64(1)
+	maxPage := 10
+	wg := new(sync.WaitGroup)
+	for i := 0; i < maxPage; i++ {
+		wg.Add(1)
+		go getGoogleImages(resultNum, nextStart, *sortAllFlag, wg)
+		nextStart += resultNum
+	}
+	wg.Wait()
+}
+
+func getGoogleImages(resultNum int64, nextStart int64, sortAllFlag bool, wg *sync.WaitGroup) error {
+	defer wg.Done()
 	developerKey := os.Getenv("DEVELOPER_KEY")
 	client := &http.Client{
 		Transport: &transport.APIKey{Key: developerKey},
@@ -22,22 +40,8 @@ func main() {
 
 	customsearchService, err := customsearch.New(client)
 	if err != nil {
-		panic(err)
+		return errors.Wrap(err, "client error")
 	}
-
-	sortAllFlag := flag.Bool("all", false, "Get default sort images")
-	flag.Parse()
-
-	resultNum := int64(10)
-	nextStart := int64(1)
-	maxPage := 1
-	for i := 0; i < maxPage; i++ {
-		getGoogleImages(customsearchService, resultNum, nextStart, *sortAllFlag)
-		nextStart += resultNum
-	}
-}
-
-func getGoogleImages(customsearchService *customsearch.Service, resultNum int64, nextStart int64, sortAllFlag bool) error {
 	searchEngineID := os.Getenv("SEARCH_ENGINE_ID")
 	customsearchQuery := customsearchService.Cse.List("佐倉綾音").Cx(searchEngineID).SearchType("image").Num(resultNum)
 	if !sortAllFlag {
